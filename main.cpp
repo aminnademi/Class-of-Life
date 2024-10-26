@@ -1,6 +1,6 @@
-#include "Genome.h"
-#include "Cell.h"
-#include "Animal.h"
+#include "includes/Genome.h"
+#include "includes/Cell.h"
+#include "includes/Animal.h"
 
 using namespace std;
 
