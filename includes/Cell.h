@@ -26,6 +26,11 @@ public:
     int count() const;
     // Simply returns the size of the chromosomes vector.
 
+    bool checkForCellDeath();
+    /* This method iterates through each chromosome and checks for mismatches in base pairing and counts A-T and C-G pairs.
+    If more than 5 mismatches are found or if the ratio of A-T pairs to C-G pairs exceeds 3:1,
+    the method returns true, indicating the cell is unhealthy and should die. */
+
     void largeMutation(const string &S1, int n, const string &S2, int m);
     /* This method calls the 'largeMutation' method on the n-th chromosome to replace the first occurrence of S1 with S2,
     and then performs a similar operation on the m-th chromosome, ensuring that genetic alterations are mirrored. */
@@ -36,6 +41,11 @@ public:
     void reverseMutation(const string &S1, int n);
     /* This method calls the reverseMutation method on the n-th chromosome,
     modifying the genetic content by reversing the first occurrence of S1. */
+
+    void findComplementaryPalindromes(int m);
+    /* This method checks substrings of the DNA strands for palindromic properties,
+    using nested loops to evaluate every possible substring length.
+    If a substring matches its complementary reverse, it is printed as a complementary palindrome. */
 };
 
 #endif
