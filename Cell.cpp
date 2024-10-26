@@ -27,3 +27,19 @@ int Cell::count() const
 {
     return chromosomes.size();
 }
+
+void Cell::largeMutation(const string &S1, int n, const string &S2, int m)
+{
+    chromosomes[n].largeMutation(S1, S2);
+    chromosomes[m].largeMutation(S2, S1);
+}
+
+void Cell::smallMutation(char from, char to, int n, int m)
+{
+    chromosomes[m].smallMutation(from, to, n);
+}
+
+void Cell::reverseMutation(const string &S1, int n)
+{
+    chromosomes[n].reverseMutation(S1);
+}
