@@ -106,3 +106,41 @@ Animal Animal::operator+(Animal &other)
     Animal child = Animal(combinedChromosomes);
     return child;
 }
+
+void Animal::checkChromosomesForIssues()
+{
+    for (int i = chromosomes.size() - 1; i >= 0; i--)
+    {
+        const Genome &chromosome = chromosomes[i];
+
+        string dna1 = chromosome.getDNA().first;
+        string dna2 = chromosome.getDNA().second;
+
+        int mismatches = 0;
+        int AT = 0, CG = 0;
+
+        for (size_t j = 0; j < dna1.length(); j++)
+        {
+            char c1 = dna1[j];
+            char c2 = dna2[j];
+
+            if (!((c1 == 'A' && c2 == 'T') || (c1 == 'T' && c2 == 'A') ||
+                  (c1 == 'C' && c2 == 'G') || (c1 == 'G' && c2 == 'C')))
+            {
+                mismatches++;
+            }
+
+            if ((c1 == 'A' && c2 == 'T') || (c1 == 'T' && c2 == 'A'))
+            {
+                AT++;
+            }
+            else if ((c1 == 'C' && c2 == 'G') || (c1 == 'G' && c2 == 'C'))
+            {
+                CG++;
+            }
+        }
+
+        if (mismatches > 5 || AT > 3 * CG)
+            chromosomes.erase(chromosomes.begin() + i);
+    }
+}

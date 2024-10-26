@@ -34,6 +34,11 @@ public:
     It performs asexual reproduction on both parents to generate two offspring,
     then randomly selects half of the chromosomes from each offspring to create a new child.
     It checks the genetic similarity of the child against both parents to ensure it exceeds 70%. */
+
+    void checkChromosomesForIssues();
+    /* This method iterates through the chromosomes in reverse order to check for mismatches and problematic base pairing.
+    If more than 5 mismatches are found or if the ratio of A-T pairs to C-G pairs exceeds 3:1 (just like 'checkForCellDeath' method),
+    it removes that chromosome from the Animal*/
 };
 
 #endif
