@@ -41,4 +41,29 @@ public:
     it removes that chromosome from the Animal*/
 };
 
+class Virus : public Genome
+{
+private:
+    Genome viralRNA;
+
+    string findLCS(const vector<string> &strs);
+    /* This private helper method finds the largest common substring among a list of strings. 
+    It iterates through all possible substrings of the first string and checks if they are found in all other strings.
+    It continues refining the largest common substring until no longer matches across all strings 
+    or if the substring becomes too small to be meaningful. */
+
+public:
+    friend class Animal;
+
+    Virus(const string &rna);
+    // This constructor calls the base Genome class to handle genome initialization and stores the RNA sequence for later use.
+
+    string getRNA() const;
+    // Returns the RNA sequence of the virus stored in the viralRNA member variable.
+
+    bool isHarmful(const Animal &animal);
+    /* This method checks if the returned LCS (from 'findLCS') or its complement is a subsequence of the viral RNA. 
+    If such a match is found, the virus is deemed harmful to the animal.*/
+};
+
 #endif

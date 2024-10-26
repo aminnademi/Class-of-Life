@@ -144,3 +144,72 @@ void Animal::checkChromosomesForIssues()
             chromosomes.erase(chromosomes.begin() + i);
     }
 }
+
+string Virus::findLCS(const vector<string> &strs)
+{
+    if (strs.empty())
+        return "";
+
+    string LCS = strs[0];
+
+    for (size_t i = 1; i < strs.size(); i++)
+    {
+        string currStr = strs[i];
+        string commonSubstr = "";
+
+        for (size_t len = 1; len <= LCS.size(); len++)
+        {
+            for (size_t s = 0; s <= LCS.size() - len; s++)
+            {
+                string substr = LCS.substr(s, len);
+                if (currStr.find(substr) != string::npos)
+                {
+                    commonSubstr = substr;
+                }
+            }
+        }
+
+        LCS = commonSubstr;
+
+        if (LCS.length() <= 2)
+        {
+            return "";
+            break;
+        }
+    }
+
+    return LCS;
+}
+
+Virus::Virus(const string &rna) : viralRNA(rna) {}
+
+string Virus::getRNA() const
+{
+    return viralRNA.getRNA();
+}
+
+bool Virus::isHarmful(const Animal &animal)
+{
+    vector<string> allChromosomes;
+
+    for (const auto &chromosome : animal.getChromosomes())
+    {
+        string strand1 = chromosome.getDNA().first;
+        string strand2 = chromosome.getDNA().second;
+        allChromosomes.push_back(strand1);
+        allChromosomes.push_back(strand2);
+    }
+
+    string LCS = findLCS(allChromosomes);
+    if (LCS == "")
+    {
+        cout << "no Largest common substing found in desired animal chromosomes\n";
+        return false;
+    }
+    else
+    {
+        cout << "Largest common substring: " << LCS << endl;
+
+        return (viralRNA.getRNA().find(LCS) != string::npos || viralRNA.getCompFromRNA().find(LCS) != string::npos);
+    }
+}
