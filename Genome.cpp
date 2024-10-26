@@ -35,3 +35,26 @@ Genome::Genome(const string &rna, const string &dna1, const string &dna2) : RNA(
 Genome::Genome(const string &dna1, const string &dna2) : DNA(dna1, dna2) {}
 
 Genome::Genome(const string &rna) : RNA(rna) {}
+
+void Genome::printGeneticContents() const
+{
+    cout << "RNA: " << RNA << endl;
+    cout << "DNA Strand 1: " << DNA.first << endl;
+    cout << "DNA Strand 2 (complementary): " << DNA.second << endl;
+}
+
+string Genome::getRNA() const
+{
+    return RNA;
+}
+
+pair<string, string> Genome::getDNA() const
+{
+    return DNA;
+}
+
+string Genome::getCompFromRNA()
+{
+    string comp = getCompStrand(RNA);
+    return comp;
+}

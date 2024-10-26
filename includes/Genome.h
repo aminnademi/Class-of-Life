@@ -32,6 +32,19 @@ public:
 
     Genome(const string &rna);
     // Alternate constructor for RNA-only initialization (used in Virus)
+
+        void printGeneticContents() const;
+    // A convenient method for displaying the full genetic information of an organism.
+
+    string getRNA() const;
+    // Retrieve the RNA strand to allow external access without exposing the internal representation for processing or mutation operations.
+
+    pair<string, string> getDNA() const;
+    /* Retrieve the DNA strands to allow external access to the DNA data
+    without exposing the internal representation for processing or mutation operations. */
+
+    string getCompFromRNA();
+    // Computes and returns the complementary strand of the RNA using 'getCompStrand'.
 };
 
 #endif
